@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Quantum\Kernel\Http\Message;
+namespace Quantum\Kernel\Http;
 
 /**
  * Enum containing all supported HTTP Request methods.
