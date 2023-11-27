@@ -11,6 +11,7 @@ use Quantum\Kernel\Pipeline\Middleware;
 
 use Quantum\Kernel\Utility\RequestMethodTrait;
 use Quantum\Kernel\Utility\RequestTargetTrait;
+use Quantum\Kernel\Utility\ValidateHandlerTrait;
 
 use InvalidArgumentException;
 
@@ -26,6 +27,7 @@ class Route
 {
     use RequestTargetTrait;
     use RequestMethodTrait;
+    use ValidateHandlerTrait;
 
     private readonly string $pattern;
     private readonly string $method;
@@ -41,23 +43,6 @@ class Route
         $this->pattern = $this->normalizeRequestTarget($pattern);
         $this->method = $this->normalizeRequestMethod($method);
         $this->handler = $handler;
-    }
-
-    /**
-     * Sets the route request handler.
-     */
-    protected function validateHandler(string $handler): void
-    {
-        if (!class_exists($handler)) {
-            $message = sprintf('Request handler %s does not exist!', $handler);
-            throw new InvalidArgumentException($message);
-        }
-
-        if (!in_array(Handler::class, class_implements($handler))) {
-            $message = 'Handler must be an implementation of';
-            $message .= ' RequestHandlerInterface!';
-            throw new InvalidArgumentException($message);
-        }
     }
 
     /**
