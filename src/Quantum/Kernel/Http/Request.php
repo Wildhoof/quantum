@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace Quantum\Kernel\Http;
 
-use InvalidArgumentException;
-
-use function in_array;
-use function strtoupper;
-use function trim;
+use Quantum\Kernel\Utility\RequestTargetTrait;
+use Quantum\Kernel\Utility\RequestMethodTrait;
 
 /**
  * Abstraction layer for HTTP Requests. Stores the relevant data in an easy
@@ -16,6 +13,9 @@ use function trim;
  */
 class Request
 {
+    use RequestTargetTrait;
+    use RequestMethodTrait;
+
     public const VALID_METHODS = [
         'GET', 'POST', 'PUT', 'PATCH',
         'DELETE', 'HEAD', 'OPTIONS',
@@ -42,33 +42,6 @@ class Request
 
         $this->queryParams = $queryParams;
         $this->parsedBody = $parsedBody;
-    }
-
-    /**
-     * Normalizes the request method by making sure that they are uppercase
-     * and contain no whitespace characters at the end.
-     */
-    private function normalizeRequestMethod(string $requestMethod): string {
-        return strtoupper(trim($requestMethod));
-    }
-
-    /**
-     * Throws an exception if the method is not valid.
-     */
-    private function validateRequestMethod(string $method) : void
-    {
-        if (!in_array($method, self::VALID_METHODS)) {
-            throw new InvalidArgumentException(
-                'Invalid Request Method ' . $method
-            );
-        }
-    }
-
-    /**
-     * Takes a raw request target and ensures it begins with a slash.
-     */
-    private function normalizeRequestTarget(string $target) : string {
-        return '/' . trim($target, '/');
     }
 
     /**
