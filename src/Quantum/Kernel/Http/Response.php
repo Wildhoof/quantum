@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace Wildframe\Kernel\Http\Message;
 
+use InvalidArgumentException;
+
+use function array_keys;
+use function in_array;
+
 /**
  * Abstraction layer for an HTTP Response.
  */
@@ -78,13 +83,40 @@ class Response
         510 => 'Not Extended'
     ];
 
-    public readonly int $statusCode;
-    public readonly string $reasonPhrase;
-    public string $body = '';
+    private int $statusCode;
+    private string $reasonPhrase;
 
     public function __construct(int $statusCode = 200)
     {
+        $this->validateStatusCode($statusCode);
+
         $this->statusCode = $statusCode;
         $this->reasonPhrase = self::PHRASES[$statusCode];
+    }
+
+    /**
+     * Throws an exception if the status code is not valid.
+     */
+    private function validateStatusCode(int $statusCode): void
+    {
+        if (!in_array($statusCode, array_keys(self::PHRASES))) {
+            throw new InvalidArgumentException(
+                'Invalid status code ' . $statusCode . '.'
+            );
+        }
+    }
+
+    /**
+     * Returns the status code of the response.
+     */
+    public function getStatusCode(): int {
+        return $this->statusCode;
+    }
+
+    /**
+     * Returns the reason phrase of the response.
+     */
+    public function getReasonPhrase(): string {
+        return $this->reasonPhrase;
     }
 }
