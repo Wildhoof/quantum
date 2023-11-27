@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Wildframe\Kernel\Http\Message;
+namespace Quantum\Kernel\Http;
 
 use InvalidArgumentException;
 

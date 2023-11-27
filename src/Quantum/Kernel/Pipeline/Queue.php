@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Quantum\Kernel\Pipeline;
 
-use Quantum\Kernel\Http\Request;
-
 use function array_shift;
 
 /**

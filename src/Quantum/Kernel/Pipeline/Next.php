@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Quantum\Kernel\Pipeline;
 
 use Quantum\Kernel\Http\Request;
+use Quantum\Kernel\Http\Response;
 
 /**
  * Handles the next middleware in the pipeline.

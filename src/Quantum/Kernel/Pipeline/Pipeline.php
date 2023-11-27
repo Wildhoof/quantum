@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Quantum\Kernel\Pipeline;
 
 use Quantum\Kernel\Http\Request;
+use Quantum\Kernel\Http\Response;
 
 /**
  * Middleware pipeline.
@@ -32,14 +33,14 @@ class Pipeline implements Middleware, Handler
     }
 
     /**
-     * Processes the command or delegates it to the handler.
+     * Processes the request or delegates it to the handler.
      */
     public function process(Request $request, Handler $handler): Response {
         return (new Next($this->queue, $handler))->handle($request);
     }
 
     /**
-     * Handles a command and produces a result.
+     * Handles a request and produces a response.
      */
     public function handle(Request $request): Response {
         return $this->process($request, $this->handler);
