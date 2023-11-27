@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Quantum\Kernel\Utility;
-
-use Quantum\Kernel\Http\Request;
+namespace Quantum\Kernel\Http;
 
 use InvalidArgumentException;
 

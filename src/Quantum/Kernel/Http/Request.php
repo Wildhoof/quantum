@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Quantum\Kernel\Http;
 
-use Quantum\Kernel\Utility\RequestTargetTrait;
-use Quantum\Kernel\Utility\RequestMethodTrait;
-
 /**
  * Abstraction layer for HTTP Requests. Stores the relevant data in an easy
  * to manipulate and mock way without affecting the original Request.

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Quantum\Kernel\Utility;
+namespace Quantum\Kernel\Http;
 
 use function trim;
 

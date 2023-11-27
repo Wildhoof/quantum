@@ -6,25 +6,15 @@ namespace Quantum\Kernel\Router;
 
 use Quantum\Kernel\Http\Request;
 
-use Quantum\Kernel\Pipeline\Handler;
-use Quantum\Kernel\Pipeline\Middleware;
-
-use Quantum\Kernel\Utility\RequestMethodTrait;
-use Quantum\Kernel\Utility\RequestTargetTrait;
-use Quantum\Kernel\Utility\ValidateHandlerTrait;
-
-use InvalidArgumentException;
-
-use function class_exists;
-use function class_implements;
-use function in_array;
-use function sprintf;
+use Quantum\Kernel\Http\RequestMethodTrait;
+use Quantum\Kernel\Http\RequestTargetTrait;
 
 /**
  * Represents the definition of an HTTP Route.
  */
 class Route
 {
+    use AddMiddlewareTrait;
     use RequestTargetTrait;
     use RequestMethodTrait;
     use ValidateHandlerTrait;
@@ -32,8 +22,6 @@ class Route
     private readonly string $pattern;
     private readonly string $method;
     private readonly string $handler;
-
-    private array $middleware = [];
 
     public function __construct(string $pattern, string $method, string $handler)
     {
@@ -43,28 +31,6 @@ class Route
         $this->pattern = $this->normalizeRequestTarget($pattern);
         $this->method = $this->normalizeRequestMethod($method);
         $this->handler = $handler;
-    }
-
-    /**
-     * Adds an array of middleware that will be run before the call of the
-     * action handler.
-     */
-    public function addMiddleware(array $middleware): void
-    {
-        foreach ($middleware as $class) {
-            if (!class_exists($class)) {
-                $message = sprintf('Middleware %s does not exist!', $class);
-                throw new InvalidArgumentException($message);
-            }
-
-            if (!in_array(Middleware::class, class_implements($class))) {
-                $message = 'Middleware must be an implementation of';
-                $message .= ' MiddlewareInterface!';
-                throw new InvalidArgumentException($message);
-            }
-        }
-
-        $this->middleware = $middleware;
     }
 
     /**

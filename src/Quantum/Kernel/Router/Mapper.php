@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace Quantum\Kernel\Router;
 
-use Quantum\Kernel\Pipeline\Handler;
-
-use Quantum\Kernel\Utility\ValidateHandlerTrait;
-
 use RuntimeException;
 
 /**
