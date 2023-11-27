@@ -85,6 +85,7 @@ class Response
 
     private int $statusCode;
     private string $reasonPhrase;
+    private string $body = '';
 
     public function __construct(int $statusCode = 200)
     {
@@ -118,5 +119,19 @@ class Response
      */
     public function getReasonPhrase(): string {
         return $this->reasonPhrase;
+    }
+
+    /**
+     * Returns the request body.
+     */
+    public function getBody(): string {
+        return $this->body;
+    }
+
+    /**
+     * Add a new request body to the object.
+     */
+    public function setBody(string $body): void {
+        $this->body = $body;
     }
 }
