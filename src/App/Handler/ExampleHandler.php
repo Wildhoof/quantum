@@ -9,6 +9,8 @@ use Quantum\Kernel\Http\Response;
 
 use Quantum\Kernel\Pipeline\Handler;
 
+use Quantum\Quantum;
+
 /**
  * Example handler that sends a simple welcome response.
  */
@@ -20,7 +22,7 @@ class ExampleHandler implements Handler
     public function handle(Request $request): Response
     {
         $response = new Response(200);
-        $response->setBody('Welcome to Quantum!');
+        $response->setBody('Welcome to Quantum ' . Quantum::VERSION . '!');
         return $response;
     }
 }
