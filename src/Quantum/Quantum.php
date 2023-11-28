@@ -27,11 +27,11 @@ class Quantum
     /**
      * The current version of the Quantum framework package.
      */
-    const VERSION = '0.1.0';
+    public const VERSION = '0.1.0';
 
-    const MAJOR_VERSION = 0;
-    const MINOR_VERSION = 1;
-    const RELEASE_VERSION = 0;
+    public const MAJOR_VERSION = 0;
+    public const MINOR_VERSION = 1;
+    public const RELEASE_VERSION = 0;
 
     private Mapper $mapper;
 
