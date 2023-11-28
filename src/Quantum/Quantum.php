@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Quantum;
 
+use Quantum\Kernel\Container\Container;
+
 use Quantum\Kernel\Http\Request;
 use Quantum\Kernel\Http\Response;
 
@@ -34,9 +36,18 @@ class Quantum
     public const RELEASE_VERSION = 0;
 
     private Mapper $mapper;
+    private Container $container;
 
     public function __construct() {
         $this->mapper = new Mapper();
+        $this->container = new Container();
+    }
+
+    /**
+     * Returns the dependency injection container.
+     */
+    public function container(): Container {
+        return $this->container;
     }
 
     /**
@@ -71,14 +82,14 @@ class Quantum
 
         // First add application middleware to pipeline
         foreach ($this->middleware as $class) {
-            $middleware = new $class;
-            $pipeline->pipe($middleware);
+            $mw = $this->container->get($class);
+            $pipeline->pipe($mw);
         }
 
         // Then add route specific middleware to pipeline
         foreach ($middleware as $class) {
-            $middleware = new $class;
-            $pipeline->pipe($middleware);
+            $mw = $this->container->get($class);
+            $pipeline->pipe($mw);
         }
 
         return $pipeline;
@@ -102,7 +113,8 @@ class Quantum
             }
         }
 
-        $pipeline = $this->buildPipe(new $handler, $middleware);
+        $handler = $this->container->get($handler);
+        $pipeline = $this->buildPipe($handler, $middleware);
         return $pipeline->handle($request);
     }
 
