@@ -105,4 +105,21 @@ class Quantum
         $pipeline = $this->buildPipe(new $handler, $middleware);
         return $pipeline->handle($request);
     }
+
+    /**
+     * Run the application and send the response to the client.
+     */
+    public function run(): void
+    {
+        $response = $this->handle(Request::createFromGlobals());
+
+        header(sprintf(
+            '%s %s %s',
+            $_SERVER['SERVER_PROTOCOL'],
+            $response->getStatusCode(),
+            $response->getReasonPhrase()
+        ));
+
+        echo $response->getBody();
+    }
 }
