@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Quantum\Kernel\Http;
 
+use function strtok;
+
 /**
  * Abstraction layer for HTTP Requests. Stores the relevant data in an easy
  * to manipulate and mock way without affecting the original Request.
@@ -39,6 +41,16 @@ class Request
 
         $this->queryParams = $queryParams;
         $this->parsedBody = $parsedBody;
+    }
+
+    /**
+     * Retrieves globals and creates a new request from those.
+     */
+    public static function createFromGlobals(): Request
+    {
+        $method = $_SERVER['REQUEST_METHOD'];
+        $uri = strtok($_SERVER["REQUEST_URI"], '?');
+        return new static($method, $uri, $_GET, $_POST);
     }
 
     /**
