@@ -47,7 +47,7 @@ class View
      * Combines the path to the template files and the filename.
      */
     private function resolveTemplatePath(string $file): string {
-        return $this->path . $file . '.php';
+        return $this->path . $file . '.phtml';
     }
 
     /**
