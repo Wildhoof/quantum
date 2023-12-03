@@ -18,10 +18,29 @@ class Database
     public const MYSQL_DATETIME = 'Y-m-d H:i:s';
 
     private PDOStatement $stmt;
-    
+    private PDO $pdo;
+
     public function __construct(
-        private readonly PDO $pdo
-    ) {}
+        string $hostname,
+        string $database,
+        string $charset,
+        string $username,
+        string $password
+    ) {
+        $dsn = 'mysql:host=' . $hostname . ';';
+        $dsn .= 'dbname=' . $database . ';';
+        $dsn .= 'charset=' . $charset . ';';
+
+        try {
+            $this->pdo = new PDO($dsn, $username, $password, [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_EMULATE_PREPARES => false,
+            ]);
+        } catch (PDOException $e) {
+            throw new PDOException('PDO connection failed');
+        }
+    }
 
     /**
      * Creates a new prepared statement.
