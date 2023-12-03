@@ -4,6 +4,12 @@ declare(strict_types=1);
 
 use Quantum\Quantum;
 
+// Uncomment if you want to use the session
+
+/*
+session_start();
+*/
+
 require  __DIR__ . '/../app/bootstrap.php';
 
 $app = new Quantum();
