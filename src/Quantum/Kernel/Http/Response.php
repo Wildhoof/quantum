@@ -85,6 +85,7 @@ class Response
 
     private int $statusCode;
     private string $reasonPhrase;
+    private string $contentType = 'text/html';
     private string $body = '';
 
     public function __construct(int $statusCode = 200)
@@ -122,10 +123,24 @@ class Response
     }
 
     /**
+     * Get the response content type.
+     */
+    public function getContentType(): string {
+        return $this->contentType;
+    }
+
+    /**
      * Returns the request body.
      */
     public function getBody(): string {
         return $this->body;
+    }
+
+    /**
+     * Save the content type. By default, this will be text/html.
+     */
+    public function setContentType(string $contentType): void {
+        $this->contentType = $contentType;
     }
 
     /**

@@ -125,12 +125,16 @@ class Quantum
     {
         $response = $this->handle(Request::createFromGlobals());
 
+        // Send response code
         header(sprintf(
             '%s %s %s',
             $_SERVER['SERVER_PROTOCOL'],
             $response->getStatusCode(),
             $response->getReasonPhrase()
         ));
+
+        // Send content type
+        header('Content-Type: ' . $response->getContentType());
 
         echo $response->getBody();
     }
