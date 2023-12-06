@@ -133,9 +133,13 @@ class Quantum
             $response->getReasonPhrase()
         ));
 
-        // Send content type
-        header('Content-Type: ' . $response->getContentType());
+        // If redirect was defined, redirect
+        if ($response->getRedirect() !== null) {
+            header('Location ' . $response->getRedirect());
+        }
 
+        // Send content type and body
+        header('Content-Type: ' . $response->getContentType());
         echo $response->getBody();
     }
 }

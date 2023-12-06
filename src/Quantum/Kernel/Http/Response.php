@@ -14,6 +14,8 @@ use function in_array;
  */
 class Response
 {
+    use RequestTargetTrait;
+
     private const PHRASES = [
 
         // Informational
@@ -86,6 +88,7 @@ class Response
     private int $statusCode;
     private string $reasonPhrase;
     private string $contentType = 'text/html';
+    private ?string $redirect = null;
     private string $body = '';
 
     public function __construct(int $statusCode = 200)
@@ -130,6 +133,13 @@ class Response
     }
 
     /**
+     * Get the redirect, if it was defined. Otherwise, return null.
+     */
+    public function getRedirect(): ?string {
+        return $this->redirect;
+    }
+
+    /**
      * Returns the request body.
      */
     public function getBody(): string {
@@ -141,6 +151,13 @@ class Response
      */
     public function setContentType(string $contentType): void {
         $this->contentType = $contentType;
+    }
+
+    /**
+     * Set the redirect target for the response.
+     */
+    public function setRedirect(string $redirect): void {
+        $this->redirect = $this->normalizeRequestTarget($redirect);
     }
 
     /**
