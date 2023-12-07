@@ -17,6 +17,9 @@ $app = new Quantum();
 // Set the services
 require  __DIR__ . '/../app/config/services.php';
 
+// Register the events
+require __DIR__ . '/../app/config/events.php';
+
 // Set the controller routes
 require  __DIR__ . '/../app/config/routes.php';
 
