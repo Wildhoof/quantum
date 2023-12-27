@@ -25,9 +25,9 @@ class View
     private string $path;
     private array $data = [];
 
-    protected array $sections = [];
-    protected ?string $layout;
-    protected ?string $section;
+    private array $sections = [];
+    private ?string $layout;
+    private ?string $section;
 
     public function __construct(string $path)
     {
@@ -39,7 +39,7 @@ class View
      * Adds parameters in the format ['name' => 'Value'] to the
      * internal data array.
      */
-    public function addData(array $data): void {
+    final public function addData(array $data): void {
         $this->data = array_merge($this->data, $data);
     }
 

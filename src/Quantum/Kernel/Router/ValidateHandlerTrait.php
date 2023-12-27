@@ -21,7 +21,7 @@ trait ValidateHandlerTrait
     /**
      * Sets the route request handler.
      */
-    protected function validateHandler(string $handler): void
+    private function validateHandler(string $handler): void
     {
         if (!class_exists($handler)) {
             $message = sprintf('Request handler %s does not exist!', $handler);

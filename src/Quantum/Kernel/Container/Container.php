@@ -16,9 +16,9 @@ use function sprintf;
  */
 class Container
 {
-    protected array $definitions = [];
-    protected array $singletons = [];
-    protected array $interfaces = [];
+    private array $definitions = [];
+    private array $singletons = [];
+    private array $interfaces = [];
 
     /**
      * Defines whether dependencies should be resolved automatically.
@@ -37,7 +37,7 @@ class Container
     /**
      * Add a definition to the container manually
      */
-    public function add(string $alias, string $class = null): Definition
+    final public function add(string $alias, string $class = null): Definition
     {
         // If no classname was provided, class is identical to the alias
         $class = $class ?? $alias;
@@ -51,21 +51,21 @@ class Container
     /**
      * Return whether a class definition exists or not
      */
-    public function has(string $alias): bool {
+    final public function has(string $alias): bool {
         return array_key_exists($alias, $this->definitions);
     }
 
     /**
      * Add a new interface or abstract class to the implementation map.
      */
-    public function addInterface(string $parent, string $class): void {
+    final public function addInterface(string $parent, string $class): void {
         $this->interfaces[$parent] = $class;
     }
 
     /**
      * Return whether an interface implementation mapping exists or not.
      */
-    public function hasInterface(string $name): bool {
+    final public function hasInterface(string $name): bool {
         return array_key_exists($name, $this->interfaces);
     }
 
@@ -73,7 +73,7 @@ class Container
      * Create and add a definition as a singleton to the container. The
      * definition will be returned as in Container::add().
      */
-    public function singleton(string $alias, string $class = null): Definition
+    final public function singleton(string $alias, string $class = null): Definition
     {
         // Create a normal definition but mark it as a singleton
         $definition = $this->add($alias, $class);
@@ -86,7 +86,7 @@ class Container
      * Returns whether a class has been already instantiated through the
      * Dependency Injection Container.
      */
-    public function hasSingleton(string $alias): bool {
+    final public function hasSingleton(string $alias): bool {
         return array_key_exists($alias, $this->singletons);
     }
 
@@ -94,7 +94,7 @@ class Container
      * Add an already instantiated class to the singleton array. As the class
      * can no longer be modified through definitions, nothing will be returned.
      */
-    public function append(string $alias, object $class): void
+    final public function append(string $alias, object $class): void
     {
         $this->definitions[$alias]['singleton'] = true;
         $this->singletons[$alias] = $class;
@@ -103,7 +103,7 @@ class Container
     /**
      * Retrieve the class from the container or return a new one
      */
-    public function get(string $alias): object
+    final public function get(string $alias): object
     {
         // Check if alias is an interface and retrieve concrete implementation
         if ($this->hasInterface($alias)) {

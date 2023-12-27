@@ -24,7 +24,7 @@ trait AddMiddlewareTrait
      * Adds an array of middleware that will be run before the call of the
      * action handler.
      */
-    public function addMiddleware(array $middleware): void
+    final public function addMiddleware(array $middleware): void
     {
         foreach ($middleware as $class) {
             if (!class_exists($class)) {

@@ -21,7 +21,7 @@ class Insert extends AbstractQuery
     /**
      * Get values as a chained string.
      */
-    protected function getValues(): string
+    private function getValues(): string
     {
         $placeholders = [];
 

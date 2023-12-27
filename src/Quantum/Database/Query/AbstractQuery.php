@@ -14,7 +14,7 @@ abstract class AbstractQuery
     /**
      * Set the table that will be accessed in that query.
      */
-    public function table(string $table): AbstractQuery {
+    final public function table(string $table): AbstractQuery {
         $this->table = $table;
         return $this;
     }

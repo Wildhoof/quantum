@@ -25,7 +25,7 @@ trait Group
     /**
      * Return the group by query fragment.
      */
-    protected function getGroup(): string
+    private function getGroup(): string
     {
         // If no group by fragment was set, return an empty string.
         if ($this->group === null) {

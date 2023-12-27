@@ -30,7 +30,7 @@ trait Limit
     /**
      * Return the limit query fragment
      */
-    protected function getLimit(): string
+    private function getLimit(): string
     {
         // If no limit was set, return an empty string.
         if ($this->rows === 0) {

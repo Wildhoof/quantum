@@ -45,7 +45,7 @@ class Database
     /**
      * Creates a new prepared statement.
      */
-    public function query(string $query): Database
+    final public function query(string $query): Database
     {
         $this->stmt = $this->pdo->prepare($query);
         return $this;
@@ -54,7 +54,7 @@ class Database
     /**
      * Binds parameters to a prepared statement.
      */
-    public function bind(mixed $id, mixed $value, int $type = null): Database
+    final public function bind(mixed $id, mixed $value, int $type = null): Database
     {
         if(is_null($type))
         {
@@ -73,14 +73,14 @@ class Database
     /**
      * Executes a prepared statement.
      */
-    public function execute(): bool {
+    final public function execute(): bool {
         return $this->stmt->execute();
     }
 
     /**
      * Returns all result rows.
      */
-    public function fetchAll(int $mode = PDO::FETCH_DEFAULT): array
+    final public function fetchAll(int $mode = PDO::FETCH_DEFAULT): array
     {
         $this->execute();
         return $this->stmt->fetchAll($mode);
@@ -89,7 +89,7 @@ class Database
     /**
      * Selects one result row.
      */
-    public function fetch(int $mode = PDO::FETCH_DEFAULT): array
+    final public function fetch(int $mode = PDO::FETCH_DEFAULT): array
     {
         $this->execute();
         return $this->stmt->fetch($mode);
@@ -98,7 +98,7 @@ class Database
     /**
      * Selects one result column.
      */
-    public function fetchColumn(int $position = 0): mixed
+    final public function fetchColumn(int $position = 0): mixed
     {
         $this->execute();
         return $this->stmt->fetchColumn($position);
@@ -107,28 +107,28 @@ class Database
     /**
      * Get last inserted id.
      */
-    public function getLastInsertId(): int {
+    final public function getLastInsertId(): int {
         return (int) $this->pdo->lastInsertId();
     }
 
     /**
      * Initiates a transaction.
      */
-    public function beginTransaction(): bool {
+    final public function beginTransaction(): bool {
         return $this->pdo->beginTransaction();
     }
 
     /**
      * Rolls back a transaction.
      */
-    public function rollBack(): bool {
+    final public function rollBack(): bool {
         return $this->pdo->rollBack();
     }
 
     /**
      * Commits a transaction.
      */
-    public function commit(): bool {
+    final public function commit(): bool {
         return $this->pdo->commit();
     }
 
@@ -136,7 +136,7 @@ class Database
      * Executes an anonymous function within a transaction and rolls back if
      * an exception occurred.
      */
-    public function transaction(Closure $function): mixed
+    final public function transaction(Closure $function): mixed
     {
         $this->beginTransaction();
 

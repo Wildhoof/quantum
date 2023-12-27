@@ -44,7 +44,7 @@ class Update extends AbstractQuery
     /**
      * Get the fragment to be inserted after SET.
      */
-    protected function getUpdates(): string
+    private function getUpdates(): string
     {
         $updates = [];
 

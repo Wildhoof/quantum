@@ -13,7 +13,7 @@ class Argument
         private readonly mixed $value
     ) {}
 
-    public function getValue(): mixed {
+    final public function getValue(): mixed {
         return $this->value;
     }
 }

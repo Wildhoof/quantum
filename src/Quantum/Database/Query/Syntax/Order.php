@@ -28,7 +28,7 @@ trait Order
     /**
      * Return the order query fragment.
      */
-    protected function getOrder(): string
+    private function getOrder(): string
     {
         // If no order by fragment was set, return an empty string.
         if ($this->by === null) {

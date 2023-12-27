@@ -17,7 +17,7 @@ trait Aggregates
     /**
      * Add an aggregate function to the query.
      */
-    public function aggregate(string $column, Functions $with, string $as): self
+    final public function aggregate(string $column, Functions $with, string $as): self
     {
         // Save aggregate for later.
         $this->aggregates[] = [
@@ -32,7 +32,7 @@ trait Aggregates
     /**
      * Return the aggregate functions as a query string fragment.
      */
-    protected function getAggregates(): string
+    private function getAggregates(): string
     {
         // If no aggregate fragment is defined, return an empty string.
         if (empty($this->aggregates)) {
