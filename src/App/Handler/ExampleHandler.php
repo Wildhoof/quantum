@@ -15,10 +15,10 @@ use Quantum\View;
 /**
  * Example handler that sends a simple welcome response.
  */
-class ExampleHandler implements Handler
+final readonly class ExampleHandler implements Handler
 {
     public function __construct(
-        private readonly View $view
+        private View $view
     ) {}
 
     /**

@@ -12,7 +12,7 @@ use Quantum\Kernel\Pipeline\Handler;
 /**
  * Example handler that sends a simple not found response.
  */
-class NotFoundHandler implements Handler
+final class NotFoundHandler implements Handler
 {
     /**
      * Handles a request and produces a response.
