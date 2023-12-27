@@ -72,7 +72,7 @@ class View
     /**
      * Tries to include a template source file.
      */
-    protected function includeFile(string $file, array $data = []): void
+    private function includeFile(string $file, array $data = []): void
     {
         extract($data);
 
@@ -87,7 +87,7 @@ class View
     /**
      * Insert one template file into another template file.
      */
-    protected function insert(string $file, array $data = []): void
+    private function insert(string $file, array $data = []): void
     {
         $mergedData = array_replace($this->data, $data);
         $this->includeFile($file, $mergedData);
