@@ -23,7 +23,7 @@ trait Where
     /**
      * Add column and placeholder of an equal condition to where.
      */
-    public function where(string $column, string $placeholder = null): self
+    final public function where(string $column, string $placeholder = null): self
     {
         $this->conditions[] = sprintf(
             self::WHERE_IS,
@@ -37,7 +37,7 @@ trait Where
     /**
      * Add column and placeholder for a not like condition to where.
      */
-    public function whereNot(string $column, string $placeholder = null): self
+    final public function whereNot(string $column, string $placeholder = null): self
     {
         $this->conditions[] = sprintf(
             self::WHERE_NOT,
@@ -51,7 +51,7 @@ trait Where
     /**
      * Add a column and placeholder for a greater than condition to where.
      */
-    public function whereGreater(
+    final public function whereGreater(
         string $column,
         string $placeholder = null
     ): self
@@ -68,7 +68,7 @@ trait Where
     /**
      * Add a column and placeholder for a smaller than condition to where.
      */
-    public function whereSmaller(
+    final public function whereSmaller(
         string $column,
         string $placeholder = null
     ): self
@@ -85,7 +85,7 @@ trait Where
     /**
      * Get entire where string part.
      */
-    protected function getWhere(): string
+    private function getWhere(): string
     {
         // If no where is present, just return empty string.
         if (empty($this->conditions)) {
