@@ -114,56 +114,56 @@ class Response
     /**
      * Returns the status code of the response.
      */
-    public function getStatusCode(): int {
+    final public function getStatusCode(): int {
         return $this->statusCode;
     }
 
     /**
      * Returns the reason phrase of the response.
      */
-    public function getReasonPhrase(): string {
+    final public function getReasonPhrase(): string {
         return $this->reasonPhrase;
     }
 
     /**
      * Get the response content type.
      */
-    public function getContentType(): string {
+    final public function getContentType(): string {
         return $this->contentType;
     }
 
     /**
      * Get the redirect, if it was defined. Otherwise, return null.
      */
-    public function getRedirect(): ?string {
+    final public function getRedirect(): ?string {
         return $this->redirect;
     }
 
     /**
      * Returns the request body.
      */
-    public function getBody(): string {
+    final public function getBody(): string {
         return $this->body;
     }
 
     /**
      * Save the content type. By default, this will be text/html.
      */
-    public function setContentType(string $contentType): void {
+    final public function setContentType(string $contentType): void {
         $this->contentType = $contentType;
     }
 
     /**
      * Set the redirect target for the response.
      */
-    public function setRedirect(string $redirect): void {
+    final public function setRedirect(string $redirect): void {
         $this->redirect = $this->normalizeRequestTarget($redirect);
     }
 
     /**
      * Add a new request body to the object.
      */
-    public function setBody(string $body): void {
+    final public function setBody(string $body): void {
         $this->body = $body;
     }
 }

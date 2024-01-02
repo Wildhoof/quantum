@@ -56,14 +56,14 @@ class Request
     /**
      * Return the request method, such as GET or POST.
      */
-    public function getRequestMethod(): string {
+    final public function getRequestMethod(): string {
         return $this->requestMethod;
     }
 
     /**
      * Return the request target, such as '/' or '/home'.
      */
-    public function getRequestTarget(): string {
+    final public function getRequestTarget(): string {
         return $this->requestTarget;
     }
 
@@ -71,7 +71,7 @@ class Request
      * Return the query params as provided in the query string part of the
      * HTTP request URI. Should return the content of $_GET.
      */
-    public function getQueryParams(): array {
+    final public function getQueryParams(): array {
         return $this->queryParams;
     }
 
@@ -79,7 +79,7 @@ class Request
      * Return the parsed request body, such as the content of $_POST or the
      * parsed JSON request body.
      */
-    public function getParsedBody(): array {
+    final public function getParsedBody(): array {
         return $this->parsedBody;
     }
 }

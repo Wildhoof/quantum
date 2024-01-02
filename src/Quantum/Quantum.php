@@ -18,6 +18,8 @@ use Quantum\Kernel\Router\Mapper;
 use Quantum\Kernel\Router\Route;
 
 use function explode;
+use function header;
+use function sprintf;
 
 /**
  * Quantum framework.
@@ -46,7 +48,7 @@ class Quantum
     /**
      * Returns the dependency injection container.
      */
-    public function container(): Container {
+    final public function container(): Container {
         return $this->container;
     }
 
@@ -55,7 +57,7 @@ class Quantum
      * and all the route middleware. The pattern looks like 'GET /home' or
      * 'POST /delete-account'.
      */
-    public function route(string $pattern, string $handler): Route
+    final public function route(string $pattern, string $handler): Route
     {
         // Split into two parts, method (0) and target (1)
         $pieces = explode(' ', $pattern);
@@ -69,7 +71,7 @@ class Quantum
     /**
      * Adds a default route to the application.
      */
-    public function notFound(string $handler): void {
+    final public function notFound(string $handler): void {
         $this->mapper->setNotFound($handler);
     }
 
@@ -98,7 +100,7 @@ class Quantum
     /**
      * Handles a request and sends a response.
      */
-    public function handle(Request $request): Response
+    final public function handle(Request $request): Response
     {
         $handler = $this->mapper->getNotFound();
         $middleware = [];
@@ -121,7 +123,7 @@ class Quantum
     /**
      * Run the application and send the response to the client.
      */
-    public function run(): void
+    final public function run(): void
     {
         $response = $this->handle(Request::createFromGlobals());
 
