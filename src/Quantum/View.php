@@ -53,7 +53,7 @@ class View
     /**
      * Renders a template file and returns the rendered result as a string.
      */
-    public function render(string $file): string
+    final public function render(string $file): string
     {
         ob_start();
         $this->includeFile($file, $this->data);
@@ -96,14 +96,14 @@ class View
     /**
      * Set a layout for a template.
      */
-    public function layout(string $name): void {
+    final public function layout(string $name): void {
         $this->layout = $name;
     }
 
     /**
      * Start a section to be displayed in a layout file.
      */
-    public function start(string $name): void
+    final public function start(string $name): void
     {
         if ($name === 'content') {
             throw new LogicException(
@@ -124,7 +124,7 @@ class View
     /**
      * End a custom section.
      */
-    public function end(string $name): void
+    final public function end(string $name): void
     {
         if (empty($this->section)) {
             throw new LogicException(
@@ -139,7 +139,7 @@ class View
     /**
      * Displays a custom section in a layout file.
      */
-    public function section(string $name): void
+    final public function section(string $name): void
     {
         if (array_key_exists($name, $this->sections)) {
             echo $this->sections[$name];
