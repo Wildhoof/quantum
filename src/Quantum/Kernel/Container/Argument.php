@@ -7,10 +7,10 @@ namespace Quantum\Kernel\Container;
 /**
  * Arguments to be used in Dependency Injection Definitions.
  */
-class Argument
+readonly class Argument
 {
     public function __construct(
-        private readonly mixed $value
+        private mixed $value
     ) {}
 
     final public function getValue(): mixed {
