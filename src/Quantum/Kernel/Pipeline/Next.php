@@ -24,7 +24,7 @@ class Next implements Handler
     /**
      * Handles a request and produces a response.
      */
-    public function handle(Request $request): Response
+    final public function handle(Request $request): Response
     {
         $middleware = $this->queue->getFromQueue();
 

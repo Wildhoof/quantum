@@ -24,7 +24,7 @@ class Pipeline implements Middleware, Handler
     /**
      * Add middleware to the middleware queue.
      */
-    public function pipe(Middleware $middleware): Pipeline
+    final public function pipe(Middleware $middleware): Pipeline
     {
         $this->queue->addToQueue($middleware);
 
@@ -35,14 +35,14 @@ class Pipeline implements Middleware, Handler
     /**
      * Processes the request or delegates it to the handler.
      */
-    public function process(Request $request, Handler $handler): Response {
+    final public function process(Request $request, Handler $handler): Response {
         return (new Next($this->queue, $handler))->handle($request);
     }
 
     /**
      * Handles a request and produces a response.
      */
-    public function handle(Request $request): Response {
+    final public function handle(Request $request): Response {
         return $this->process($request, $this->handler);
     }
 }

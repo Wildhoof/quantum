@@ -28,7 +28,7 @@ class EventHandler
     /**
      * Add a new event to the event collection
      */
-    public function attach(string $name, string $event, int $priority = 0): void
+    final public function attach(string $name, string $event, int $priority = 0): void
     {
         if (!class_exists($event)) {
             $message = sprintf('Event %s does not exist!', $event);
@@ -48,7 +48,7 @@ class EventHandler
     /**
      * Trigger an event.
      */
-    public function trigger(string $name, array $params = []): void
+    final public function trigger(string $name, array $params = []): void
     {
         if (isset($this->events[$name])) {
             $event = $this->events[$name];

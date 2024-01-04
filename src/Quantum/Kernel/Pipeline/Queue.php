@@ -16,14 +16,14 @@ class Queue
     /**
      * Add a middleware item to the end of the queue.
      */
-    public function addToQueue(Middleware $middleware): void {
+    final public function addToQueue(Middleware $middleware): void {
         $this->middleware[] = $middleware;
     }
 
     /**
      * Get the next item in the middleware queue.
      */
-    public function getFromQueue(): ?Middleware {
+    final public function getFromQueue(): ?Middleware {
         return array_shift($this->middleware);
     }
 }

@@ -36,21 +36,21 @@ class Route
     /**
      * Returns the normalized route pattern.
      */
-    public function getPattern(): string {
+    final public function getPattern(): string {
         return $this->pattern;
     }
 
     /**
      * Return the route request handler.
      */
-    public function getHandler(): string {
+    final public function getHandler(): string {
         return $this->handler;
     }
 
     /**
      * Returns the route middleware.
      */
-    public function getMiddleware(): array {
+    final public function getMiddleware(): array {
         return $this->middleware;
     }
 
@@ -58,7 +58,7 @@ class Route
      * Uses the provided Matcher to check whether this Route matches the
      * provided Request and returns the result as a boolean.
      */
-    public function matchesRequest(Request $request): bool
+    final public function matchesRequest(Request $request): bool
     {
         // First check the Request method
         if ($this->method != $request->getRequestMethod()) {
