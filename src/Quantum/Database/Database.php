@@ -21,11 +21,11 @@ class Database
     private PDO $pdo;
 
     public function __construct(
-        string $hostname,
-        string $database,
-        string $charset,
-        string $username,
-        string $password
+        #[\SensitiveParameter] string $hostname,
+        #[\SensitiveParameter] string $database,
+        #[\SensitiveParameter] string $charset,
+        #[\SensitiveParameter] string $username,
+        #[\SensitiveParameter] string $password
     ) {
         $dsn = 'mysql:host=' . $hostname . ';';
         $dsn .= 'dbname=' . $database . ';';
