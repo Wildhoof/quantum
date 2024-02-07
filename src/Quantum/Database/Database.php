@@ -89,7 +89,7 @@ class Database
     /**
      * Selects one result row.
      */
-    final public function fetch(int $mode = PDO::FETCH_DEFAULT): array
+    final public function fetch(int $mode = PDO::FETCH_DEFAULT): mixed
     {
         $this->execute();
         return $this->stmt->fetch($mode);
